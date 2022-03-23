@@ -1,7 +1,6 @@
 use clap::Parser;
 use std::fs;
 
-#[allow(unused_assignments)]
 /// Command Line Interface to generate React Components.
 #[derive(Parser, Debug)]
 #[clap(author, version, about, long_about = None)]
