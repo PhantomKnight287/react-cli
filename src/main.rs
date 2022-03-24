@@ -1,82 +1,34 @@
-use clap::Parser;
-use std::fs;
-
-/// Command Line Interface to generate React Components.
-#[derive(Parser, Debug)]
-#[clap(author, version, about, long_about = None)]
-struct Args {
-    /// Name of the component to create
-    #[clap(short, long)]
-    name: String,
-
-    /// Create a given stylesheet
-    #[clap(short, long, default_value = "css")]
-    stylesheet: String,
-
-    /// Create Stylesheet module
-    #[clap(short, long)]
-    create_stylesheet_module: bool,
-
-    /// Create TypeScript Component
-    #[clap(short, long)]
-    typescript: bool,
+use std::env;
+mod create_component_files;
+use crate::create_component_files::files_creater;
+fn main() {
+    let mut command_line_args = env::args().enumerate();
+    let component_name = command_line_args.find(|(_, arg)| arg == "--name" || arg == "--n");
+    let typescript = command_line_args.find(|(_, arg)| arg == "--ts" || arg == "--typescript");
+    let css_module = command_line_args.find(|(_, arg)| arg == "--module" || arg == "--m");
+    let mut stylesheet: String = String::new();
+    let component_file_name;
+    if css_module != None {
+        stylesheet = format!("{:}.module.css", get_args(component_name.clone()),);
+    } else if css_module == None {
+        stylesheet = format!("{:}.css", get_args(component_name.clone()),);
+    }
+    if typescript == None {
+        component_file_name = format!("{:}.jsx", get_args(component_name.clone()),);
+    } else {
+        component_file_name = format!("{:}.tsx", get_args(component_name),);
+    }
+    println!("{:}", component_file_name);
+    files_creater::components_files_creater(
+        component_file_name,
+        stylesheet.clone(),
+        stylesheet.contains("module"),
+    );
 }
 
-fn main() {
-    let args = Args::parse();
-    fs::create_dir(&args.name).expect("Failed to Create Folder");
-    let component_file_name: String;
-    let stylesheet_file_name: String;
-    let component_file_content: String;
-    let stylesheet_file_content = format!(
-        ".h1{{
-    text-align:center;
-}}"
-    );
-    if args.typescript == true {
-        component_file_name = "index.tsx".to_string();
-    } else {
-        component_file_name = "index.jsx".to_string();
-    }
-
-    if args.create_stylesheet_module == true {
-        stylesheet_file_name = format!("{}.module.{}", args.name, args.stylesheet);
-    } else {
-        stylesheet_file_name = format!("{}.{}", args.name, args.stylesheet);
-    }
-
-    if stylesheet_file_name.contains("module") {
-        component_file_content = format!(
-            "import styles from \"./{}\";
-export default function {}(){{
-    return <h1 className=\"{{styles.h1}}\"> {} Works</h1>
-    
-}}
-",
-            stylesheet_file_name, args.name, args.name
-        )
-    } else {
-        component_file_content = format!(
-            "import \"./{}\";
-export default function {}(){{
-    return <h1 className=\"h1\">{} Works</h1>
-}}
-        ",
-            stylesheet_file_name, args.name, args.name
-        )
-        .to_string();
-    }
-
-    fs::write(
-        format!("{}/{}", args.name, component_file_name),
-        component_file_content,
-    )
-    .expect("Failed to Create Component File");
-    fs::write(
-        format!("{}/{}", args.name, stylesheet_file_name),
-        stylesheet_file_content,
-    )
-    .expect("Failed To Create StyleSheet File");
-
-    println!("Created {} Component", args.name);
+fn get_args(component_name: std::option::Option<(usize, std::string::String)>) -> String {
+    env::args()
+        .nth(component_name.unwrap().0 + 1)
+        .unwrap()
+        .to_string()
 }
