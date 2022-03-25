@@ -1,26 +1,22 @@
-### React Cli
+# React Cli
 
-A cli to generate React Components.
+A cli to create React Components and Hooks.
 
-## Instructions
+Instructions:
 
-Download the Binary
-
+- Download the binary.
+- To Create A React Component
 ```bash
-    ./react -n <Component Name> 
+    ./react --n <Component Name>
 ```
-This will create a folder with Component name with css as default stylesheet.
-
-To Change this behaviour you can use tags like
-`-t`,`-c`,`-s`
-
-- `-t` tag will create a Typescript Component
-- `-c` will create a stylesheet module.
-- `-s <name>` This will create stylesheet of defined name
-
-For Example:
-
+- To Create React Hook
+```bash
+    ./react --h <Hook Name>
 ```
-./react -n Header -t -c -s sass
-```
-This will create Header component with Sass modules
+
+#### Available Flags
+
+- `--ts` &rarr; Used To Create Component with Typescript.
+- `--m` &rarr; Used To Create Css modules instead of global Css.
+
+
