@@ -1,11 +1,42 @@
 use std::env;
 mod create_component_files;
 use crate::create_component_files::files_creater;
+mod create_hooks_files;
+use crate::create_hooks_files::hooks_file_creator;
+use colored::Colorize;
 fn main() {
-    let mut command_line_args = env::args().enumerate();
-    let component_name = command_line_args.find(|(_, arg)| arg == "--name" || arg == "--n");
-    let typescript = command_line_args.find(|(_, arg)| arg == "--ts" || arg == "--typescript");
-    let css_module = command_line_args.find(|(_, arg)| arg == "--module" || arg == "--m");
+    let component_name = env::args()
+        .enumerate()
+        .find(|(_, arg)| arg == "--name" || arg == "--n");
+    let typescript = env::args()
+        .enumerate()
+        .find(|(_, arg)| arg == "--ts" || arg == "--typescript");
+    let css_module = env::args()
+        .enumerate()
+        .find(|(_, arg)| arg == "--module" || arg == "--m");
+    let hook = env::args()
+        .enumerate()
+        .find(|(_, arg)| arg == "--hook" || arg == "--h");
+    if hook != None {
+        let hook_file_name;
+        if typescript != None {
+            hook_file_name = format!(
+                "{:}.tsx",
+                get_args(hook.clone()).split(".").collect::<Vec<&str>>()[0]
+            );
+        } else {
+            hook_file_name = format!(
+                "{:}.jsx",
+                get_args(hook.clone()).split(".").collect::<Vec<&str>>()[0]
+            );
+        }
+        hooks_file_creator::hooks_file_creator(hook_file_name);
+        return;
+    }
+    if component_name == None {
+        println!("{}", format!("Please Provide A Component Name").red());
+        return;
+    }
     let mut stylesheet: String = String::new();
     let component_file_name;
     if css_module != None {
