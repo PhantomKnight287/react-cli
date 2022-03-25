@@ -19,7 +19,7 @@ fn main() {
         .find(|(_, arg)| arg == "--hook" || arg == "--h");
     let help = env::args()
         .enumerate()
-        .find(|(_, arg)| arg == "--help" || arg == "--H");
+        .find(|(_, arg)| arg == "--help");
 
     if help != None {
         println!("\t{}", format!("{}", "USAGE:".bold().green()).bold());
