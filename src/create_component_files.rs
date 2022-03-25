@@ -1,5 +1,6 @@
 #[allow(non_snake_case)]
 pub mod files_creater {
+    use colored::Colorize;
     use std::fs;
     pub fn components_files_creater(
         componentName: String,
@@ -30,7 +31,7 @@ export default function {:}() {{
             );
         } else {
             css_file_content = format!(
-                ".h1{{
+                ".h1Container{{
     text-align:center;
 }}
                 "
@@ -60,7 +61,7 @@ export default function {:}() {{
                 componentName.split(".").collect::<Vec<&str>>()[0],
                 componentName
             ),
-            component_file_content,
+            component_file_content.clone(),
         )
         .expect("Error writing file");
         fs::write(
@@ -69,8 +70,28 @@ export default function {:}() {{
                 componentName.split(".").collect::<Vec<&str>>()[0],
                 stylesheetName
             ),
-            css_file_content,
+            css_file_content.clone(),
         )
         .expect("Error writing file");
+        println!(
+            "{}",
+            format!(
+                "{} {:}/{:}",
+                "CREATE".green(),
+                componentName.split(".").collect::<Vec<&str>>()[0],
+                componentName,
+            )
+            .bold()
+        );
+        println!(
+            "{}",
+            format!(
+                "{} {:}/{:}",
+                "CREATE".green(),
+                componentName.split(".").collect::<Vec<&str>>()[0],
+                stylesheetName,
+            )
+            .bold()
+        );
     }
 }
