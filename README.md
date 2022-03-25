@@ -20,3 +20,5 @@ Instructions:
 - `--m` &rarr; Used To Create Css modules instead of global Css.
 
 
+## End Notes
+Thank to [0xBirdie](https://github.com/itsmebirdie) for testing and releasing binaries for Windows and Mac machines.
