@@ -17,6 +17,38 @@ fn main() {
     let hook = env::args()
         .enumerate()
         .find(|(_, arg)| arg == "--hook" || arg == "--h");
+    let help = env::args()
+        .enumerate()
+        .find(|(_, arg)| arg == "--help" || arg == "--h");
+
+    if help != None {
+        println!("\t{}", format!("{}", "USAGE:".bold().green()).bold());
+        println!(
+            "\t{}",
+            format!("{}", "react [--name] [--ts] [--module] [--hook] [--help]").bold()
+        );
+        // make a nice help message
+        println!("\t{}", format!("{}", "--name [name]").bold());
+        println!(
+            "\t{}",
+            format!("{}", "The name of the component you want to create").bold()
+        );
+        println!("\t{}", format!("{}", "--ts").bold());
+        println!(
+            "\t{}",
+            format!("{}", "Create a typescript component").bold()
+        );
+        println!("\t{}", format!("{}", "--module").bold());
+        println!(
+            "\t{}",
+            format!("{}", "Create a css module instead of global css").bold()
+        );
+        println!("\t{}", format!("{}", "--hook").bold());
+        println!("\t{}", format!("{}", "Create a hook file").bold());
+        println!("\t{}", format!("{}", "--help").bold());
+        println!("\t{}", format!("{}", "Show this help message").bold());
+        return;
+    }
     if hook != None {
         let hook_file_name;
         if typescript != None {
