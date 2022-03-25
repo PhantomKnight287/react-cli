@@ -18,7 +18,6 @@ fn main() {
     } else {
         component_file_name = format!("{:}.tsx", get_args(component_name),);
     }
-    println!("{:}", component_file_name);
     files_creater::components_files_creater(
         component_file_name,
         stylesheet.clone(),
