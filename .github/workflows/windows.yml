@@ -17,7 +17,7 @@ jobs:
       - name: Build the binary
         run: |
           cargo build --release -vv
-          ren target/release/react.exe target/release/react_windows-x86_64.exe
+          ren target/release/react.exe react_windows-x86_64.exe
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
         with:

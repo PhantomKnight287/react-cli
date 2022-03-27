@@ -18,7 +18,7 @@ jobs:
       - name: Build the binary
         run: |
           cargo build --release -vv
-          mv target/release/react_macos-x86_64 target/release/react_macos-x86_64
+          mv target/release/react target/release/react_macos-x86_64
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
         with:
