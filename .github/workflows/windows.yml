@@ -15,14 +15,16 @@ jobs:
           override: true
           toolchain: stable
       - name: Build the binary
-        run: cargo build --release -vv
+        run: |
+          cargo build --release -vv
+          ren target/release/react.exe target/release/react_windows-x86_64.exe
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
         with:
           name: react-cli
-          path: target/release/react.exe
+          path: target/release/react_windows-x86_64.exe
       - name: Publish in release
         uses: softprops/action-gh-release@v1
         with:
-          files: target/release/react.exe
+          files: target/release/react_windows-x86_64.exe
           token: ${{ secrets.GH_TOKEN }}

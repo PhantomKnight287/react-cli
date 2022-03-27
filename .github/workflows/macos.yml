@@ -16,14 +16,16 @@ jobs:
           toolchain: stable
           target: "aarch64-apple-darwin"
       - name: Build the binary
-        run: cargo build --release -vv
+        run: |
+          cargo build --release -vv
+          mv target/release/react_macos-x86_64 target/release/react_macos-x86_64
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
         with:
           name: react-cli
-          path: target/release/react
+          path: target/release/react_macos-x86_64
       - name: Publish in release
         uses: softprops/action-gh-release@v1
         with:
-          files: target/release/react
+          files: target/release/react_macos-x86_64
           token: ${{ secrets.GH_TOKEN }}
