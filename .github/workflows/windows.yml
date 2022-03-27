@@ -1,4 +1,4 @@
-name: Build for linux
+name: Build for Windows
 on: [release]
 jobs:
   build-linux:
