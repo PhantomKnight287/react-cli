@@ -18,7 +18,6 @@ jobs:
       - name: Build the binary
         run: |
           cargo build -Zmultitarget --target=x86_64-pc-windows-msvc --target=i686-pc-windows-msvc --release -vv
-          ls target\x86_64-pc-windows-msvc\release
           ren target\x86_64-pc-windows-msvc\release\react.exe react-x86_64-pc-windows-msvc.exe
           ren target\i686-pc-windows-msvc\release\react.exe react-i686-pc-windows-msvc.exe
       - name: Upload build artifacts
