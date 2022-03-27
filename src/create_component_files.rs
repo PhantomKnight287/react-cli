@@ -1,19 +1,18 @@
-#[allow(non_snake_case)]
 pub mod files_creater {
     use colored::Colorize;
     use std::fs;
     pub fn components_files_creater(
-        componentName: String,
-        stylesheetName: String,
-        isCssModule: bool,
+        component_name: String,
+        stylesheet_name: String,
+        is_css_module: bool,
     ) {
         let index_file_content = format!(
             "export * from \"./{}\";",
-            componentName.split(".").collect::<Vec<&str>>()[0]
+            component_name.split(".").collect::<Vec<&str>>()[0]
         );
         let css_file_content;
         let component_file_content;
-        if isCssModule == true {
+        if is_css_module == true {
             css_file_content = format!(
                 ".h1Container{{
     text-align:center;
@@ -30,8 +29,8 @@ export default function {:}() {{
             );
 }}
                 ",
-                stylesheetName,
-                componentName.split(".").collect::<Vec<&str>>()[0]
+                stylesheet_name,
+                component_name.split(".").collect::<Vec<&str>>()[0]
             );
         } else {
             css_file_content = format!(
@@ -50,20 +49,20 @@ export default function {:}() {{
             );
 }}
                 ",
-                stylesheetName,
-                componentName.split(".").collect::<Vec<&str>>()[0]
+                stylesheet_name,
+                component_name.split(".").collect::<Vec<&str>>()[0]
             );
         }
         fs::create_dir(format!(
             "{:}",
-            componentName.split(".").collect::<Vec<&str>>()[0]
+            component_name.split(".").collect::<Vec<&str>>()[0]
         ))
         .expect("Error creating directory");
         fs::write(
             format!(
                 "{:}/{:}",
-                componentName.split(".").collect::<Vec<&str>>()[0],
-                componentName
+                component_name.split(".").collect::<Vec<&str>>()[0],
+                component_name
             ),
             component_file_content.clone(),
         )
@@ -71,8 +70,8 @@ export default function {:}() {{
         fs::write(
             format!(
                 "{:}/{:}",
-                componentName.split(".").collect::<Vec<&str>>()[0],
-                stylesheetName
+                component_name.split(".").collect::<Vec<&str>>()[0],
+                stylesheet_name
             ),
             css_file_content.clone(),
         )
@@ -80,8 +79,8 @@ export default function {:}() {{
         fs::write(
             format!(
                 "{:}/index.{:}",
-                componentName.split(".").collect::<Vec<&str>>()[0],
-                componentName.split(".").collect::<Vec<&str>>()[1]
+                component_name.split(".").collect::<Vec<&str>>()[0],
+                component_name.split(".").collect::<Vec<&str>>()[1]
             ),
             index_file_content.clone(),
         )
@@ -92,8 +91,8 @@ export default function {:}() {{
             format!(
                 "{} {:}/{:}",
                 "CREATE".green(),
-                componentName.split(".").collect::<Vec<&str>>()[0],
-                componentName,
+                component_name.split(".").collect::<Vec<&str>>()[0],
+                component_name,
             )
             .bold()
         );
@@ -102,8 +101,8 @@ export default function {:}() {{
             format!(
                 "{} {:}/{:}",
                 "CREATE".green(),
-                componentName.split(".").collect::<Vec<&str>>()[0],
-                stylesheetName,
+                component_name.split(".").collect::<Vec<&str>>()[0],
+                stylesheet_name,
             )
             .bold()
         );
@@ -112,10 +111,10 @@ export default function {:}() {{
             format!(
                 "{} {:}/{:}",
                 "CREATE".green(),
-                componentName.split(".").collect::<Vec<&str>>()[0],
+                component_name.split(".").collect::<Vec<&str>>()[0],
                 format!(
                     "index.{:}",
-                    componentName.split(".").collect::<Vec<&str>>()[1]
+                    component_name.split(".").collect::<Vec<&str>>()[1]
                 ),
             )
             .bold()
