@@ -13,7 +13,7 @@ jobs:
         with:
           default: true
           override: true
-          toolchain: stable
+          toolchain: nightly
       - name: Build the binary
         run: |
           cargo build --release -vv
