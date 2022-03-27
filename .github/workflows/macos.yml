@@ -13,12 +13,11 @@ jobs:
         with:
           default: true
           override: true
-          toolchain: stable
+          toolchain: nightly
           target: "aarch64-apple-darwin"
       - name: Build the binary
         run: |
           cargo build --release -Zmultitarget --target=x86_64-apple-darwin --target=aarch64-apple-darwin -vv
-          mv target/release/react target/release/react_macos-x86_64
           ls target/release
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
