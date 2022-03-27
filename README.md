@@ -21,4 +21,4 @@ Instructions:
 
 
 ## End Notes
-Thank to [0xBirdie](https://github.com/itsmebirdie) for testing and releasing binaries for Windows and Mac machines.
+Thanks to [0xBirdie](https://github.com/itsmebirdie) for testing and releasing binaries for Windows and Mac machines.
