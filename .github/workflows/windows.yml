@@ -20,4 +20,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: react-cli
-          path: target/release/react
+          path: target/release/react.exe
