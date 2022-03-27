@@ -14,17 +14,23 @@ jobs:
           default: true
           override: true
           toolchain: nightly
+          target: "i686-pc-windows-msvc"
       - name: Build the binary
         run: |
-          cargo build --release -vv
-          ren target/release/react.exe react_windows-x86_64.exe
+          cargo build -Zmultitarget --target=x86_64-pc-windows-msvc --target=i686-pc-windows-msvc --release -vv
+          ren target/x86_64-pc-windows-msvc/release/react target/x86_64-pc-windows-msvc/release/react-x86_64-pc-windows-msvc
+          ren target/i686-pc-windows-msvc/release/react target/x86_64-pc-windows-msvc/release/react-i686-pc-windows-msvc
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
         with:
           name: react-cli
-          path: target/release/react_windows-x86_64.exe
+          path: |
+            target/x86_64-pc-windows-msvc/release/react-x86_64-pc-windows-msvc
+            target/x86_64-pc-windows-msvc/release/react-i686-pc-windows-msvc
       - name: Publish in release
         uses: softprops/action-gh-release@v1
         with:
-          files: target/release/react_windows-x86_64.exe
+          files: |
+            target/x86_64-pc-windows-msvc/release/react-x86_64-pc-windows-msvc
+            target/x86_64-pc-windows-msvc/release/react-i686-pc-windows-msvc
           token: ${{ secrets.GH_TOKEN }}

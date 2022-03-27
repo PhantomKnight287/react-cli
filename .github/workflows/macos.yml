@@ -20,6 +20,7 @@ jobs:
           cargo build --release -Zmultitarget --target=x86_64-apple-darwin --target=aarch64-apple-darwin -vv
           mv target/x86_64-apple-darwin/release/react target/x86_64-apple-darwin/release/react-x86_64-apple-darwin
           mv target/aarch64-apple-darwin/release/react target/aarch64-apple-darwin/release/react-aarch64-apple-darwin
+          ls target/
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
         with:
