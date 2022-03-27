@@ -1,5 +1,7 @@
 name: Build for linux
-on: release
+on:
+  release:
+    types: [published]
 jobs:
   build-linux:
     runs-on: ubuntu-latest

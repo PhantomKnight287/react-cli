@@ -1,5 +1,7 @@
 name: Build for macOS
-on: release
+on:
+  release:
+    types: [published]
 jobs:
   build-linux:
     runs-on: macos-latest
