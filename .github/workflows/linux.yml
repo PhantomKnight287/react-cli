@@ -14,17 +14,23 @@ jobs:
           default: true
           override: true
           toolchain: nightly
+          target: i686-unknown-linux-gnu
       - name: Build the binary
         run: |
-          cargo build --release -vv
-          mv target/release/react target/release/react_linux-x86_64
+          cargo build -Zmultitarget --target=x86_64-unknown-linux-gnu --target=i686-unknown-linux-gnu--release -vv
+          mv target/x86_64-unknown-linux-gnu/release/react target/x86_64-unknown-linux-gnu/release/react-x86_64-unknown-linux-gnu
+          mv target/-unknown-linux-gnu/release/react target/i686-unknown-linux-gnu/release/react-i686-unknown-linux-gnu
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
         with:
           name: react-cli
-          path: target/release/react_linux-x86_64
+          path: |
+            target/x86_64-unknown-linux-gnu/release/react-x86_64-unknown-linux-gnu
+            target/i686-unknown-linux-gnu/release/react-i686-unknown-linux-gnu
       - name: Publish in release
         uses: softprops/action-gh-release@v1
         with:
-          files: target/release/react_linux-x86_64
+          files: |
+            target/x86_64-unknown-linux-gnu/release/react-x86_64-unknown-linux-gnu
+            target/i686-unknown-linux-gnu/release/react-i686-unknown-linux-gnu
           token: ${{ secrets.GH_TOKEN }}
