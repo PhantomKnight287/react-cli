@@ -22,7 +22,7 @@ struct Args {
     #[clap(short, long)]
     module: bool,
 
-    /// Number of times to greet
+    /// Create a hook file
     #[clap(long)]
     hook: bool,
 }
