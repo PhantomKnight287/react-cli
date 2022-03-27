@@ -21,3 +21,8 @@ jobs:
         with:
           name: react-cli
           path: target/release/react.exe
+      - name: Publish in release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: target/release/react.exe
+          token: ${{ secrets.GH_TOKEN }}
