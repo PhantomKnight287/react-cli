@@ -1,4 +1,4 @@
-name: Build for linux
+name: Build for Linux
 on:
   release:
     types: [published]
