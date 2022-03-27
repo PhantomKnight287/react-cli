@@ -7,6 +7,10 @@ pub mod files_creater {
         stylesheetName: String,
         isCssModule: bool,
     ) {
+        let index_file_content = format!(
+            "export * from \"./{}\";",
+            componentName.split(".").collect::<Vec<&str>>()[0]
+        );
         let css_file_content;
         let component_file_content;
         if isCssModule == true {
@@ -73,6 +77,16 @@ export default function {:}() {{
             css_file_content.clone(),
         )
         .expect("Error writing file");
+        fs::write(
+            format!(
+                "{:}/index.{:}",
+                componentName.split(".").collect::<Vec<&str>>()[0],
+                componentName.split(".").collect::<Vec<&str>>()[1]
+            ),
+            index_file_content.clone(),
+        )
+        .expect("Error writing file");
+
         println!(
             "{}",
             format!(
@@ -90,6 +104,19 @@ export default function {:}() {{
                 "CREATE".green(),
                 componentName.split(".").collect::<Vec<&str>>()[0],
                 stylesheetName,
+            )
+            .bold()
+        );
+        println!(
+            "{}",
+            format!(
+                "{} {:}/{:}",
+                "CREATE".green(),
+                componentName.split(".").collect::<Vec<&str>>()[0],
+                format!(
+                    "index.{:}",
+                    componentName.split(".").collect::<Vec<&str>>()[1]
+                ),
             )
             .bold()
         );

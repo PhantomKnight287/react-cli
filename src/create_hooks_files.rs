@@ -16,6 +16,18 @@ pub mod hooks_file_creator {
             ),
         )
         .expect(format!("Error Creating {:}", hook_file_name).as_str());
+        fs::write(
+            format!(
+                "{}/index.{:}",
+                hook_file_name.clone().split(".").collect::<Vec<&str>>()[0],
+                hook_file_name.clone().split(".").collect::<Vec<&str>>()[1]
+            ),
+            format!(
+                "export * from \"./{:}\";",
+                hook_file_name.clone().split(".").collect::<Vec<&str>>()[0]
+            ),
+        )
+        .expect(format!("Error Creating {:}", hook_file_name).as_str());
         println!(
             "{}",
             format!(
@@ -23,6 +35,19 @@ pub mod hooks_file_creator {
                 "CREATE".green(),
                 hook_file_name.clone().split(".").collect::<Vec<&str>>()[0],
                 hook_file_name,
+            )
+            .bold()
+        );
+        println!(
+            "{}",
+            format!(
+                "{} {:}/{:}",
+                "CREATE".green(),
+                hook_file_name.clone().split(".").collect::<Vec<&str>>()[0],
+                format!(
+                    "index.{:}",
+                    hook_file_name.split(".").collect::<Vec<&str>>()[1]
+                ),
             )
             .bold()
         );
