@@ -1,5 +1,5 @@
 name: Build for Windows
-on: [release]
+on: release
 jobs:
   build-linux:
     runs-on: windows-latest

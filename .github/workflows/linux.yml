@@ -1,5 +1,5 @@
 name: Build for linux
-on: [release]
+on: release
 jobs:
   build-linux:
     runs-on: ubuntu-latest
