@@ -26,5 +26,5 @@ jobs:
       - name: Publish in release
         uses: softprops/action-gh-release@v1
         with:
-          files: target/release/react-linux_x86_64
+          files: target/release/react_linux-x86_64
           token: ${{ secrets.GH_TOKEN }}
