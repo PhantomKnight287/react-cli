@@ -18,8 +18,8 @@ jobs:
       - name: Build the binary
         run: |
           cargo build --release -Zmultitarget --target=x86_64-apple-darwin --target=aarch64-apple-darwin -vv
-          cd target/x86_64-apple-darwin/release/ && tar -cvf react-x86_64-apple-darwin.tar.gz react  && cd ../..
-          cd target/aarch64-apple-darwin/release/ && tar -cvf react-aarch64-apple-darwin.tar.gz react  && cd ../..
+          cd target/x86_64-apple-darwin/release/ && tar -cvf react-x86_64-apple-darwin.tar.gz react  && cd ../../..
+          cd target/aarch64-apple-darwin/release/ && tar -cvf react-aarch64-apple-darwin.tar.gz react  && cd ../../..
       - name: Upload react-x86_64-apple-darwin.tar.gz
         uses: actions/upload-artifact@v3
         with:

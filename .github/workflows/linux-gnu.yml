@@ -29,9 +29,9 @@ jobs:
 
           cargo build -Zmultitarget --target=x86_64-unknown-linux-gnu --target=i686-unknown-linux-gnu --target=aarch64-unknown-linux-gnu --release -vv
 
-          cd target/x86_64-unknown-linux-gnu/release/ && tar -cvf react-x86_64-unknown-linux-gnu.tar.gz react && cd ../..
-          cd target/aarch64-unknown-linux-gnu/release/ && tar -cvf react-aarch64-unknown-linux-gnu.tar.gz react  && cd ../..
-          cd target/i686-unknown-linux-gnu/release/ && tar -cvf react-i686-unknown-linux-gnu.tar.gz react  && cd ../..
+          cd target/x86_64-unknown-linux-gnu/release/ && tar -cvf react-x86_64-unknown-linux-gnu.tar.gz react && cd ../../..
+          cd target/aarch64-unknown-linux-gnu/release/ && tar -cvf react-aarch64-unknown-linux-gnu.tar.gz react  && cd ../../..
+          cd target/i686-unknown-linux-gnu/release/ && tar -cvf react-i686-unknown-linux-gnu.tar.gz react  && cd ../../..
       - name: Upload react-x86_64-unknown-linux-gnu.tar.gz
         uses: actions/upload-artifact@v3
         with:
