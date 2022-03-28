@@ -7,17 +7,23 @@ Instructions:
 - Download the binary.
 - To Create A React Component
 ```bash
-    ./react --n <Component Name>
+    ./react -n <Component Name>
 ```
 - To Create React Hook
 ```bash
-    ./react --h <Hook Name>
+    ./react -h <Hook Name>
 ```
 
 #### Available Flags
-
-- `--ts` &rarr; Used To Create Component with Typescript.
-- `--m` &rarr; Used To Create Css modules instead of global Css.
+```
+-h, --help           Print help information
+    --hook           Create a hook file
+-m, --module         Create a css module instead of global css
+-n, --name <NAME>    The name of the component you want to create
+    --ts             Same as --typescript
+    --typescript     Create a typescript component
+-V, --version        Print version information
+```
 
 
 ## End Notes

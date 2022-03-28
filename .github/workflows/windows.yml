@@ -18,19 +18,23 @@ jobs:
       - name: Build the binary
         run: |
           cargo build -Zmultitarget --target=x86_64-pc-windows-msvc --target=i686-pc-windows-msvc --release -vv
-          ren target\x86_64-pc-windows-msvc\release\react.exe react-x86_64-pc-windows-msvc.exe
-          ren target\i686-pc-windows-msvc\release\react.exe react-i686-pc-windows-msvc.exe
-      - name: Upload build artifacts
+          cd target\x86_64-pc-windows-msvc\release\react.exe && tar -cvf react-x86_64-pc-windows-msvc.zip react.exe  && cd ../..
+          ren target\i686-pc-windows-msvc\release\react.exe react-i686-pc-windows-msvc.exe  && cd ../..
+      - name: Upload react-x86_64-pc-windows-msvc
         uses: actions/upload-artifact@v3
         with:
-          name: react-cli
-          path: |
-            target\x86_64-pc-windows-msvc\release\react-x86_64-pc-windows-msvc.exe
-            target\i686-pc-windows-msvc\release\react-i686-pc-windows-msvc.exe
+          name: react-x86_64-pc-windows-msvc.zip
+          path: target\x86_64-pc-windows-msvc\release\react-x86_64-pc-windows-msvc.zip
+      - name: Upload react-i686-pc-windows-msvc
+        uses: actions/upload-artifact@v3
+        with:
+          name: react-i686-pc-windows-msvc.zip
+          path: target\i686-pc-windows-msvc\release\react-i686-pc-windows-msvc.zip
+
       - name: Publish in release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            target\x86_64-pc-windows-msvc\release\react-x86_64-pc-windows-msvc.exe
-            target\i686-pc-windows-msvc\release\react-i686-pc-windows-msvc.exe
+            target\x86_64-pc-windows-msvc\release\react-x86_64-pc-windows-msvc.zip
+            target\i686-pc-windows-msvc\release\react-i686-pc-windows-msvc.zip
           token: ${{ secrets.GH_TOKEN }}
