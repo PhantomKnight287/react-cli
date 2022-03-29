@@ -2,6 +2,7 @@ name: Build for Windows
 on:
   release:
     types: [published]
+  workflow_dispatch:
 jobs:
   build-windows:
     runs-on: windows-latest

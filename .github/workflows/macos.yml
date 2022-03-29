@@ -2,6 +2,7 @@ name: Build for macOS
 on:
   release:
     types: [published]
+  workflow_dispatch:
 jobs:
   build-macos:
     runs-on: macos-latest
@@ -28,8 +29,8 @@ jobs:
       - name: Upload aarch64-apple-darwin.tar.gz
         uses: actions/upload-artifact@v3
         with:
-          name: react-x86_64-apple-darwin.tar.gz
-          path: target/x86_64-apple-darwin/release/react-x86_64-apple-darwin.tar.gz
+          name: react-aarch64-apple-darwin.tar.gz
+          path: target/aarch64-apple-darwin/release/react-aarch64-apple-darwin.tar.gz
 
       - name: Publish in release
         uses: softprops/action-gh-release@v1

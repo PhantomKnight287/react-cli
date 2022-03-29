@@ -2,6 +2,7 @@ name: Build for GNU/Linux
 on:
   release:
     types: [published]
+  workflow_dispatch:
 jobs:
   build-gnu-linux:
     runs-on: ubuntu-latest
