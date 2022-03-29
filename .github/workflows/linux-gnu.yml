@@ -19,7 +19,9 @@ jobs:
       - name: Build the binary
         run: |
           rustup target add aarch64-unknown-linux-gnu
-          sudo apt update && sudo apt install -y -qq gcc-i686-linux-gnu gcc-aarch64-linux-gnu
+          rustup target add armv7-unknown-linux-gnueabi
+          rustup target add armv7-unknown-linux-gnueabihf
+          sudo apt update && sudo apt install -y -qq gcc-i686-linux-gnu gcc-aarch64-linux-gnu gcc-arm-linux-gnueabi gcc-arm-linux-gnueabihf
           mkdir -p .cargo
 
           echo '[target.i686-unknown-linux-gnu]'>>.cargo/config
@@ -28,11 +30,25 @@ jobs:
           echo '[target.aarch64-unknown-linux-gnu]'>>.cargo/config
           echo 'linker = "aarch64-linux-gnu-gcc"'>>.cargo/config
 
-          cargo build -Zmultitarget --target=x86_64-unknown-linux-gnu --target=i686-unknown-linux-gnu --target=aarch64-unknown-linux-gnu --release -vv
+          echo '[target.armv7-unknown-linux-gnueabi]' >>.cargo/config
+          echo 'linker = "arm-linux-gnueabi-gcc"' >>.cargo/config
+
+          echo '[target.armv7-unknown-linux-gnueabihf]' >>.cargo/config
+          echo 'linker = "arm-linux-gnueabihf-gcc"' >>.cargo/config
+
+          cargo build -Zmultitarget --target=x86_64-unknown-linux-gnu \
+                --target=i686-unknown-linux-gnu \
+                --target=aarch64-unknown-linux-gnu \
+                --target=aarch64-unknown-linux-gnu \
+                --target=armv7-unknown-linux-gnueabi \
+                --target=armv7-unknown-linux-gnueabihf \
+                --release -vv
 
           cd target/x86_64-unknown-linux-gnu/release/ && tar -cvf react-x86_64-unknown-linux-gnu.tar.gz react && cd ../../..
           cd target/aarch64-unknown-linux-gnu/release/ && tar -cvf react-aarch64-unknown-linux-gnu.tar.gz react  && cd ../../..
           cd target/i686-unknown-linux-gnu/release/ && tar -cvf react-i686-unknown-linux-gnu.tar.gz react  && cd ../../..
+          cd target/armv7-unknown-linux-gnueabi/release/ && tar -cvf react-armv7-unknown-linux-gnueabi.tar.gz react  && cd ../../..
+          cd target/armv7-unknown-linux-gnueabihf/release/ && tar -cvf react-armv7-unknown-linux-gnueabihf.tar.gz react  && cd ../../..
       - name: Upload react-x86_64-unknown-linux-gnu.tar.gz
         uses: actions/upload-artifact@v3
         with:
@@ -48,6 +64,16 @@ jobs:
         with:
           name: react-i686-unknown-linux-gnu.tar.gz
           path: target/i686-unknown-linux-gnu/release/react-i686-unknown-linux-gnu.tar.gz
+      - name: Upload armv7-unknown-linux-gnueabi.tar.gz
+        uses: actions/upload-artifact@v3
+        with:
+          name: react-armv7-unknown-linux-gnueabi.tar.gz
+          path: target/armv7-unknown-linux-gnueabi/release/react-armv7-unknown-linux-gnueabi.tar.gz
+      - name: Upload armv7-unknown-linux-gnueabihf.tar.gz
+        uses: actions/upload-artifact@v3
+        with:
+          name: react-armv7-unknown-linux-gnueabihf.tar.gz
+          path: target/armv7-unknown-linux-gnueabihf/release/react-armv7-unknown-linux-gnueabihf.tar.gz
       - name: Publish in release
         uses: softprops/action-gh-release@v1
         with:
@@ -55,4 +81,6 @@ jobs:
             target/x86_64-unknown-linux-gnu/release/react-x86_64-unknown-linux-gnu.tar.gz
             target/i686-unknown-linux-gnu/release/react-i686-unknown-linux-gnu.tar.gz
             target/aarch64-unknown-linux-gnu/release/react-aarch64-unknown-linux-gnu.tar.gz
+            target/armv7-unknown-linux-gnu/release/react-armv7-unknown-linux-gnueabi.tar.gz
+            target/armv7-unknown-linux-gnu/release/react-armv7-unknown-linux-gnueabihf.tar.gz
           token: ${{ secrets.GH_TOKEN }}

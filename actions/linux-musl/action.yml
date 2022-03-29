@@ -1,5 +1,5 @@
 name: "Build rust for musl libc"
-description: "Build rust binaries for musl libc using alpine and docker"
+description: "Build rust binaries for musl libc using void linux and docker"
 runs:
   using: "docker"
-  image: "Dockerfile"
+  image: "markosth09/voidlinux-rust-nightly-cross:latest"
