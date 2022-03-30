@@ -16,6 +16,8 @@ jobs:
           override: true
           toolchain: nightly
           target: "aarch64-apple-darwin"
+      - name: Cache build
+        uses: Swatinem/rust-cache@v1
       - name: Build the binary
         run: |
           cargo build --release -Zmultitarget --target=x86_64-apple-darwin --target=aarch64-apple-darwin -vv

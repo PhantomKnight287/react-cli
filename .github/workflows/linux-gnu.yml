@@ -16,6 +16,8 @@ jobs:
           override: true
           toolchain: nightly
           target: i686-unknown-linux-gnu
+      - name: Cache build
+        uses: Swatinem/rust-cache@v1
       - name: Build the binary
         run: |
           rustup target add aarch64-unknown-linux-gnu
@@ -49,6 +51,7 @@ jobs:
           cd target/i686-unknown-linux-gnu/release/ && tar -cvf react-i686-unknown-linux-gnu.tar.gz react  && cd ../../..
           cd target/armv7-unknown-linux-gnueabi/release/ && tar -cvf react-armv7-unknown-linux-gnueabi.tar.gz react  && cd ../../..
           cd target/armv7-unknown-linux-gnueabihf/release/ && tar -cvf react-armv7-unknown-linux-gnueabihf.tar.gz react  && cd ../../..
+
       - name: Upload react-x86_64-unknown-linux-gnu.tar.gz
         uses: actions/upload-artifact@v3
         with:

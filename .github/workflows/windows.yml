@@ -16,6 +16,8 @@ jobs:
           override: true
           toolchain: nightly
           target: "i686-pc-windows-msvc"
+      - name: Cache build
+        uses: Swatinem/rust-cache@v1
       - name: Build the binary
         run: |
           rustup target add aarch64-pc-windows-msvc
