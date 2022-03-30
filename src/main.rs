@@ -43,7 +43,6 @@ fn main() {
         } else {
             hook_file_name = format!("{:}.tsx", component_name);
         }
-        println!("Creating hook file: {}", hook_file_name);
         hooks_file_creator::hooks_file_creator(hook_file_name);
         return;
     }
