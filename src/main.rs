@@ -23,7 +23,7 @@ struct Args {
     module: bool,
 
     /// Create a hook file
-    #[clap(long)]
+    #[clap(short = 'H', long)]
     hook: bool,
 }
 
@@ -38,11 +38,12 @@ fn main() {
 
     if hook {
         let hook_file_name;
-        if typescript {
-            hook_file_name = format!("{:}.jsx", hook);
+        if typescript == false && ts == false {
+            hook_file_name = format!("{:}.jsx", component_name);
         } else {
-            hook_file_name = format!("{:}.tsx", hook);
+            hook_file_name = format!("{:}.tsx", component_name);
         }
+        println!("Creating hook file: {}", hook_file_name);
         hooks_file_creator::hooks_file_creator(hook_file_name);
         return;
     }
