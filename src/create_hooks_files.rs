@@ -23,7 +23,7 @@ pub mod hooks_file_creator {
                 hook_file_name.clone().split(".").collect::<Vec<&str>>()[1]
             ),
             format!(
-                "export * from \"./{:}\";",
+                "export {{default}} from \"./{:}\";",
                 hook_file_name.clone().split(".").collect::<Vec<&str>>()[0]
             ),
         )

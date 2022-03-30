@@ -7,7 +7,7 @@ pub mod files_creater {
         is_css_module: bool,
     ) {
         let index_file_content = format!(
-            "export * from \"./{}\";",
+            "export {{default}} from \"./{}\";",
             component_name.split(".").collect::<Vec<&str>>()[0]
         );
         let css_file_content;
