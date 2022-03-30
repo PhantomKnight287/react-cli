@@ -46,4 +46,4 @@ jobs:
             target\x86_64-pc-windows-msvc\release\react-x86_64-pc-windows-msvc.zip
             target\i686-pc-windows-msvc\release\react-i686-pc-windows-msvc.zip
             target\aarch64-pc-windows-msvc\release\react-aarch64-pc-windows-msvc.zip
-          token: ${{ secrets.GH_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}

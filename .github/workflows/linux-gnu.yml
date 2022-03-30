@@ -83,4 +83,4 @@ jobs:
             target/aarch64-unknown-linux-gnu/release/react-aarch64-unknown-linux-gnu.tar.gz
             target/armv7-unknown-linux-gnu/release/react-armv7-unknown-linux-gnueabi.tar.gz
             target/armv7-unknown-linux-gnu/release/react-armv7-unknown-linux-gnueabihf.tar.gz
-          token: ${{ secrets.GH_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}

@@ -45,4 +45,4 @@ jobs:
             target/aarch64-unknown-linux-musl/release/react-aarch64-unknown-linux-musl.tar.gz
             target/armv7-unknown-linux-musl/release/react-armv7-unknown-linux-musleabi.tar.gz
             target/armv7-unknown-linux-musl/release/react-armv7-unknown-linux-musleabihf.tar.gz
-          token: ${{ secrets.GH_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
