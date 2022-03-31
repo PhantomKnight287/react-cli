@@ -25,6 +25,10 @@ struct Args {
     /// Create a hook file
     #[clap(short = 'H', long)]
     hook: bool,
+
+    /// The name of stylesheet you want to create
+    #[clap(short = 'S', long, default_value = "css")]
+    stylesheet: String,
 }
 
 fn main() {
@@ -34,6 +38,7 @@ fn main() {
         ts,
         module: css_module,
         hook,
+        stylesheet: stylesheet_name,
     } = Args::parse();
 
     if hook {
@@ -49,9 +54,9 @@ fn main() {
     let stylesheet: String;
     let component_file_name;
     if css_module {
-        stylesheet = format!("{:}.module.css", component_name);
+        stylesheet = format!("{:}.module.{:}", component_name, stylesheet_name);
     } else {
-        stylesheet = format!("{:}.css", component_name);
+        stylesheet = format!("{:}.{:}", component_name, stylesheet_name);
     }
     if typescript || ts {
         component_file_name = format!("{:}.tsx", component_name);
