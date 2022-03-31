@@ -7,18 +7,13 @@ pub mod files_creater {
         is_css_module: bool,
     ) {
         let index_file_content = format!(
-            "export {{default}} from \"./{}\";",
+            "export {{ default }} from \"./{}\";",
             component_name.split(".").collect::<Vec<&str>>()[0]
         );
         let css_file_content;
         let component_file_content;
         if is_css_module == true {
-            css_file_content = format!(
-                ".h1Container{{
-    text-align:center;
-}}
-"
-            );
+            css_file_content = "".to_string();
             component_file_content = format!(
                 "import styles from './{:}';
 export default function {:}() {{
@@ -33,12 +28,7 @@ export default function {:}() {{
                 component_name.split(".").collect::<Vec<&str>>()[0]
             );
         } else {
-            css_file_content = format!(
-                ".h1Container{{
-    text-align:center;
-}}
-                "
-            );
+            css_file_content = "".to_string();
             component_file_content = format!(
                 "import './{:}';
 export default function {:}() {{
@@ -53,71 +43,89 @@ export default function {:}() {{
                 component_name.split(".").collect::<Vec<&str>>()[0]
             );
         }
-        fs::create_dir(format!(
+        let result = fs::create_dir(format!(
             "{:}",
             component_name.split(".").collect::<Vec<&str>>()[0]
-        ))
-        .expect("Error creating directory");
-        fs::write(
+        ));
+        match result {
+            Ok(_) => {
+                println!(
+                    "{}",
+                    format!(
+                        "{} {}",
+                        "Created Directory:".green(),
+                        component_name.split(".").collect::<Vec<&str>>()[0]
+                    )
+                );
+            }
+            Err(e) => {
+                println!("{}", format!("{} {}", "Error:".red(), e));
+                return;
+            }
+        }
+        let result = fs::write(
             format!(
                 "{:}/{:}",
                 component_name.split(".").collect::<Vec<&str>>()[0],
                 component_name
             ),
             component_file_content.clone(),
-        )
-        .expect("Error writing file");
-        fs::write(
+        );
+        match result {
+            Ok(_) => {
+                println!(
+                    "{}",
+                    format!("{} {}", "Created File:".green(), component_name)
+                );
+            }
+            Err(e) => {
+                println!("{}", format!("{} {}", "Error:".red(), e));
+                return;
+            }
+        }
+        let result = fs::write(
             format!(
                 "{:}/{:}",
                 component_name.split(".").collect::<Vec<&str>>()[0],
                 stylesheet_name
             ),
             css_file_content.clone(),
-        )
-        .expect("Error writing file");
-        fs::write(
+        );
+        match result {
+            Ok(_) => {
+                println!(
+                    "{}",
+                    format!("{} {}", "Created File:".green(), stylesheet_name)
+                );
+            }
+            Err(e) => {
+                println!("{}", format!("{} {}", "Error:".red(), e));
+                return;
+            }
+        }
+        let result = fs::write(
             format!(
                 "{:}/index.{:}",
                 component_name.split(".").collect::<Vec<&str>>()[0],
                 component_name.split(".").collect::<Vec<&str>>()[1]
             ),
             index_file_content.clone(),
-        )
-        .expect("Error writing file");
-
-        println!(
-            "{}",
-            format!(
-                "{} {:}/{:}",
-                "CREATE".green(),
-                component_name.split(".").collect::<Vec<&str>>()[0],
-                component_name,
-            )
-            .bold()
         );
-        println!(
-            "{}",
-            format!(
-                "{} {:}/{:}",
-                "CREATE".green(),
-                component_name.split(".").collect::<Vec<&str>>()[0],
-                stylesheet_name,
-            )
-            .bold()
-        );
-        println!(
-            "{}",
-            format!(
-                "{} {:}/{:}",
-                "CREATE".green(),
-                component_name.split(".").collect::<Vec<&str>>()[0],
-                format!(
-                    "index.{:}",
-                    component_name.split(".").collect::<Vec<&str>>()[1]
-                ),
-            )
-            .bold()
-        );
+        match result {
+            Ok(_) => {
+                println!(
+                    "{}",
+                    format!(
+                        "{} index.{:}",
+                        "Created File:".green(),
+                        component_name.split(".").collect::<Vec<&str>>()[1]
+                    )
+                );
+            }
+            Err(e) => {
+                println!("{}", format!("{} {}", "Error:".red(), e));
+                return;
+            }
+        }
     }
 }
