@@ -24,6 +24,7 @@ Instructions:
 -H  --hook           Create a hook file
 -m, --module         Create a css module instead of global css
 -n, --name <NAME>    The name of the component you want to create
+-S, --stylesheet <STYLESHEET>    The name of stylesheet you want to create [default: css]
     --ts             Same as --typescript
     --typescript     Create a typescript component
 -V, --version        Print version information
