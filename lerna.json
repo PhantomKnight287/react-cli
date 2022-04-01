@@ -1,0 +1,21 @@
+{
+    "$schema": "http://json.schemastore.org/lerna",
+    "npmClient": "yarn",
+    "packages": [
+        "packages/*"
+    ],
+    "useWorkspaces": true,
+    "command": {
+        "version": {
+            "exact": true
+        },
+        "publish": {
+            "npmClient": "npm",
+            "allowBranch": [
+                "main"
+            ],
+            "registry": "http://0.0.0.0:4873/"
+        }
+    },
+    "version": "1.0.0"
+}
