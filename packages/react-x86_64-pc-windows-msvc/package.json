@@ -1,6 +1,6 @@
 {
   "name": "@react-cli/react-x86_64-pc-windows-msvc",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,6 +8,6 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "gitHead": "729ecf26d88575d62a82ed9b9bed43e3ca9775cf"
 }

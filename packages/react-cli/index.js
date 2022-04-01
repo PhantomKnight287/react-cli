@@ -1,4 +1,4 @@
-//!/usr/bin/env node
+#!/usr/bin/env node
 const { family: libc } = require("detect-libc");
 const os = require("os");
 
@@ -30,5 +30,5 @@ let rustPlatform = "";
       }-${await libc()}`;
     }
   }
-  require(rustPlatform).execute();
+  require(`@react-cli/react-${rustPlatform}`);
 })();

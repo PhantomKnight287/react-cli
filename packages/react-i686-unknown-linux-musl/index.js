@@ -1,7 +1,3 @@
-function execute() {
-  return require("child_process").execSync("react-cli");
-}
+const { execute } = require("@react-cli/react-cli-exec");
 
-module.exports = {
-  execute
-};
+execute.apply(this, [__dirname]);

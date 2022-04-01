@@ -1,6 +1,6 @@
 {
-  "name": "@react-cli/react-x86_64-unknown-linux-musl",
-  "version": "0.0.0",
+  "name": "@react-cli/react-cli-exec",
+  "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,6 +8,5 @@
   },
   "keywords": [],
   "author": "",
-  "license": "MIT",
-  "gitHead": "729ecf26d88575d62a82ed9b9bed43e3ca9775cf"
+  "license": "MIT"
 }
