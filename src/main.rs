@@ -29,6 +29,10 @@ struct Args {
     /// The name of stylesheet you want to create
     #[clap(short = 'S', long, default_value = "css")]
     stylesheet: String,
+
+    /// Create a Class Based Component
+    #[clap(short='C',long)]
+    class: bool,
 }
 
 fn main() {
@@ -39,6 +43,7 @@ fn main() {
         module: css_module,
         hook,
         stylesheet: stylesheet_name,
+        class
     } = Args::parse();
 
     if hook {
@@ -67,5 +72,6 @@ fn main() {
         component_file_name,
         stylesheet.clone(),
         stylesheet.contains("module"),
+        class
     );
 }
