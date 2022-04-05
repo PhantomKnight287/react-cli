@@ -20,6 +20,7 @@ Instructions:
 #### Available Flags
 
 ```
+-C, --class                      Create a Class Based Component
 -h, --help           Print help information
 -H  --hook           Create a hook file
 -m, --module         Create a css module instead of global css
