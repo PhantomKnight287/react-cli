@@ -9,5 +9,11 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
+  "os": [
+    "linux"
+  ],
+  "cpu": [
+    "aarch64"
+  ],
   "gitHead": "729ecf26d88575d62a82ed9b9bed43e3ca9775cf"
 }

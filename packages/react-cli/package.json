@@ -14,5 +14,16 @@
     "detect-libc": "^2.0.1",
     "user": "^0.0.0"
   },
+  "cpu": [
+    "x64",
+    "ia32",
+    "arm",
+    "arm64"
+  ],
+  "os": [
+    "win32",
+    "darwin",
+    "linux"
+  ],
   "gitHead": "729ecf26d88575d62a82ed9b9bed43e3ca9775cf"
 }

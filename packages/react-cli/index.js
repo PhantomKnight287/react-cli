@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const { familySync: libc } = require("detect-libc");
+const { familySync: libcName } = require("detect-libc");
 const os = require("os");
 
 const architectures = {
@@ -24,7 +24,11 @@ switch (platform) {
     break;
   }
   case "linux": {
-    rustPlatform = `${architectures[os.arch()]}-${osMap[platform]}-${libc()}`;
+    const libc = libcName();
+    const libcPlatform = os.arch() === "arm" ? `${libc}eabi` : libc;
+    rustPlatform = `${architectures[os.arch()]}-${
+      osMap[platform]
+    }-${libcPlatform}`;
   }
 }
 require(`@react-cli/react-${rustPlatform}`);
