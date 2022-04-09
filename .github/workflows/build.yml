@@ -221,6 +221,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "16.x"
+      - name: Setup yarn
+        run: |
+          sudo corepack enable
+          yarn set version berry
       - name: Download binaries
         uses: actions/download-artifact@v3
         with:
@@ -233,6 +237,7 @@ jobs:
       - name: Publish Packages
         run: |
           yarn install
+          yarn set version classic
           yarn lerna bootstrap
           yarn lerna version --conventional-commits --conventional-graduate --yes --include-merged-tags
           node -e 'console.log(require("./package.json").version)'
