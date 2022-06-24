@@ -8,7 +8,7 @@ pub mod files_creater {
         is_class_component: bool,
     ) {
         let index_file_content = format!(
-            "export {{ default }} from \"./{}\";",
+            "export * from \"./{}\";",
             component_name.split(".").collect::<Vec<&str>>()[0]
         );
         let css_file_content;
@@ -22,14 +22,9 @@ pub mod files_creater {
                 )
             } else {
                 component_file_content = format!(
-                    "import styles from './{:}';
-                    export default function {:}() {{
-                        return (
-                            <div className={{styles.h1Container}}>
-                            <h1>Hello World</h1>
-                            </div>
-                        );
-                    }}
+                    "import styles from './{:}';\nexport default function {:}() {{\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<h1>Hello World</h1>\n\t\t\t</div>
+)
+}}
                     ",
                     stylesheet_name,
                     component_name.split(".").collect::<Vec<&str>>()[0]
@@ -44,13 +39,8 @@ pub mod files_creater {
                 )
             } else {
                 component_file_content = format!(
-                    "import './{:}';
-                    export default function {:}() {{
-                        return (
-                            <div className=\"h1Container\" >
-                            <h1>Hello, world!</h1>
-            </div>
-        );
+                    "import './{:}';\nexport default function {:}() {{\n\t\treturn (\n\t\t\t<div >\n\t\t\t\t<h1>Hello, world!</h1>\n\t\t</div>
+);
 }}
                 ",
                     stylesheet_name,
